@@ -39,7 +39,7 @@ class ReceitaController extends Controller
             return $a->nome . ' (' . $a->quantidade . ' ' . $a->unidade_medida . ')';
         })->implode(", ");
     // Prompt detalhado para a IA gerar a receita
-        $prompt = "Você é um chef de cozinha criativo. Crie SEMPRE uma receita detalhada, criativa e saborosa usando apenas os ingredientes fornecidos pelo usuário, mesmo que sejam poucos ou incomuns: $lista. Nunca recuse, sempre invente uma receita possível, dê um nome, descreva o modo de preparo e as quantidades sugeridas. Seja flexível e criativo!";
+        $prompt = "Você é um chef de cozinha criativo. Crie SEMPRE uma receita detalhada, criativa e saborosa usando apenas os ingredientes fornecidos pelo usuário, mesmo que sejam poucos ou incomuns: $lista. Nunca recuse, sempre invente uma receita possível, dê um nome, descreva o modo de preparo e as quantidades sugeridas (Não precisa usar a quantidade total do alimento!). Seja flexível e criativo!";
 
     // Configurações do modelo e autenticação
         $model = 'meta-llama/Llama-3.1-8B-Instruct';
