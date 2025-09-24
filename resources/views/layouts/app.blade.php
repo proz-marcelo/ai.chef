@@ -9,6 +9,59 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+        // Sistema de Notificações Global
+        const Toast = {
+            generating: () => {
+                Swal.fire({
+                    title: 'Gerando Receita...',
+                    icon: 'info',
+                    iconColor: '#38BDF8',
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timerProgressBar: true,
+                    toast: true,
+                    background: document.documentElement.classList.contains('dark') ? '#1F2937' : '#FFFFFF',
+                    color: document.documentElement.classList.contains('dark') ? '#FFFFFF' : '#1F2937',
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        Swal.showLoading()
+                    }
+                });
+            },
+            ready: () => {
+                Swal.fire({
+                    title: 'Receita Pronta!',
+                    icon: 'success',
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProgressBar: true,
+                    toast: true,
+                    background: document.documentElement.classList.contains('dark') ? '#1F2937' : '#FFFFFF',
+                    color: document.documentElement.classList.contains('dark') ? '#FFFFFF' : '#1F2937',
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                });
+            },
+            // Adicione outras notificações aqui conforme necessário
+        };
+
+        // Event Listeners Globais
+        document.addEventListener('DOMContentLoaded', function() {
+            // Listener para formulários de geração de receita
+            document.querySelectorAll('form[action="{{ route("receitas.gerar") }}"]').forEach(form => {
+                form.addEventListener('submit', () => Toast.generating());
+            });
+
+            // Mostrar notificação de receita pronta se estiver na página de visualização
+            if (window.location.pathname.includes('/receitas/')) {
+                Toast.ready();
+            }
+        });
+
         tailwind.config = {
             darkMode: 'class',
             theme: {
