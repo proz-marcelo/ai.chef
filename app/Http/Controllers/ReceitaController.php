@@ -11,14 +11,6 @@ use Illuminate\Support\Facades\Http;
 class ReceitaController extends Controller
 {
     /**
-     * Exibe o formulário para geração de uma nova receita.
-     */
-    public function gerarForm()
-    {
-        return view('receitas.gerar');
-    }
-
-    /**
      * Gera uma receita usando a API Hugging Face com base nos ingredientes cadastrados.
      * Se não houver ingredientes, redireciona para o cadastro de alimentos.
      */
